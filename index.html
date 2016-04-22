@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Vending Machine Change Calculator TDD</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-1.18.0.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  </head>
+  <body>
+    <div id='main' style='padding: 2em;'>
+      <h1>Vending Machine Change Calculator</h1>
+      <h2>Calculate the Change for a Given Price and Cash Received</h2>
+      <!-- <input type='text' id='price'> </input> -->
+    </div>
+
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
+
+    <script>
+      var coins = [200, 100, 50, 20, 10, 5, 2, 1];
+      test('getChange(12, 400) should return [200, 100, 50, 20, 10, 5, 2, 1]', function(assert) {
+        var result = getChange(12, 400);
+        var expected = [200, 100, 50, 20, 10, 5, 2, 1];
+        assert.deepEqual(result, expected);
+      });
+
+      test('getChange(215, 300) should return [50, 20, 10, 5]', function(assert) {
+        var result = getChange(215, 300); // expect an array containing [50,20,10,5]
+        var expected = [50, 20, 10, 5];
+        assert.deepEqual(result, expected);
+      });
+
+    test('getChange(486, 600) should equal [100, 10, 2, 2]', function(assert) {
+      var result = getChange(486, 600);
+      var expected = [100, 10, 2, 2];
+      assert.deepEqual(result, expected);
+    });
+      function getChange(cost, paid){
+      var possibleCoins = [200, 100, 50, 20, 10, 5, 2, 1]; // Must be in decending order
+      var changeToMake = paid - cost;
+      var coinsToReturn = [];// Array we will fill with coins to return to the user
+
+      while(changeToMake){ // while there is sill money left to give loop! same as "while(changeToMake > 0)"
+        for (var i = 0; i < possibleCoins.length; i++) {
+          if (changeToMake >= possibleCoins[i]) { // if changeToGive is larger than the current coin use that coin
+            changeToMake -= possibleCoins[i]; // remove this coins value from the total change
+            coinsToReturn.push(possibleCoins[i]); // add the coin to the return list of coins
+            i--; // Move back one to try the same coin again
+          }
+        }
+      }
+      return coinsToReturn;
+    }
+    </script>
+  </body>
+</html>
