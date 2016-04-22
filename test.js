@@ -1,7 +1,5 @@
-/* The code block below ONLY Applies to Node.js - This Demonstrates
-   re-useability of JS code in both Back-end and Front-end! #isomorphic */
-/* istanbul ignore if */
-if (typeof module !== 'undefined' && module.exports) {
+/* istanbul ignore next */
+if (typeof module !== 'undefined' && module.exports) { // check we're server-side
   var QUnit = require('qunitjs'); // require QUnit node.js module
   // alias the QUnit.test method so we don't have to change all our tests
   var test = QUnit.test; // stores a copy of QUnit.test
